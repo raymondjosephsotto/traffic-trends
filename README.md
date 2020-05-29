@@ -25,10 +25,13 @@ Data: Use the provided JSON data for traffic crashes to develop static sources.
 
 Crash Predictions:
     https://cdn.urbansdk.com/predictions.json
+
 Zone Counts:
     https://cdn.urbansdk.com/zone_count.json
+
 Predictions vs Actual:
     https://cdn.urbansdk.com/actual_v_prediction.json
+
 
 Create a visualization of the data you loaded that works in a browser. Add some sort of interactivity, like a filter or some other UI element of your choice. And, a way to download the data in the visualization. A suggested set of libraries.
 Apex Charts
