@@ -34,14 +34,19 @@ Predictions vs Actual:
 
 
 Create a visualization of the data you loaded that works in a browser. Add some sort of interactivity, like a filter or some other UI element of your choice. And, a way to download the data in the visualization. A suggested set of libraries.
+
 Apex Charts
     https://apexcharts.com/
+
 Mapbox - Studio
     https://www.mapbox.com/mapbox-studio/
+
 Kepler.gl 
     https://kepler.gl/
+
 Deck.gl
     https://deck.gl/#/
+
 Commit the project on the Gitlab repo so that it can be downloaded and supply an adequately complete README/startup documentation for us to run it.
 
 
