@@ -1,68 +1,39 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**UI Developer Homework Project**
 
-## Available Scripts
+The final stage in the interview process is to complete a homework assignment and collaborate with our team. The assignment is meant to allow you to make your own decisions, complete a task, and present to our team for a collaborative interview.
 
-In the project directory, you can run:
+**GOAL: ** This is an example of a current project that you would own. Create a vertical slice of a simple model or web application, with your choice of technologies, that can display a prediction visually online.
 
-### `yarn start`
+We made some suggestions but it’s up to you. We want to understand
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+How you communicate and make decisions What is possible for you to accomplish in a short period of time How important it is for you to work with us. We’re hiring owners, not employees.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+**STEPS:**
 
-### `yarn test`
+1. You will have 1-2 weeks to complete.
+2. Commit your code to this repo under a new branch and give us 2-3 business days to review.
+3. Setup a time to do a screenshare and walk us through what you built.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**PROJECT REQUIREMENTS:**
 
-### `yarn build`
+Develop a dashboard to display and track trends in traffic crashes in Duval County. Data: Use the provided JSON data for traffic crashes to develop static sources.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Crash Predictions: https://cdn.urbansdk.com/predictions.json
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Zone Counts: https://cdn.urbansdk.com/zone_count.json
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Predictions vs Actual: https://cdn.urbansdk.com/actual_v_prediction.json
 
-### `yarn eject`
+Create a visualization of the data you loaded that works in a browser. Add some sort of interactivity, like a filter or some other UI element of your choice. And, a way to download the data in the visualization. A suggested set of libraries.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Apex Charts https://apexcharts.com/
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Mapbox - Studio https://www.mapbox.com/mapbox-studio/
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Kepler.gl https://kepler.gl/
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Deck.gl https://deck.gl/#/
 
-## Learn More
+Commit the project on the Gitlab repo so that it can be downloaded and supply an adequately complete README/startup documentation for us to run it or a Dockerfile that will run the application.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**NOTES:** Asking questions for clarification on project requirements or intent is okay. Asking for code is not. :) The above data sources are recommendations, but you are welcome to use different sources if you want. The goal is a functional vertical slice and not the use of those specific sources. The choice of API framework/library is up to you. Use of external tools, libraries or like to accelerate your development is fine; we’d want you to do the same at work.
