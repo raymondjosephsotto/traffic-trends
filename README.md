@@ -47,7 +47,7 @@ Kepler.gl
 Deck.gl
     https://deck.gl/#/
 
-Commit the project on the Gitlab repo so that it can be downloaded and supply an adequately complete README/startup documentation for us to run it.
+Commit the project on the Gitlab repo so that it can be downloaded and supply an adequately complete README/startup documentation for us to run it or a Dockerfile that will run the application.
 
 
 **NOTES:**
