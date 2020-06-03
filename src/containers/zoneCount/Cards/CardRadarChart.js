@@ -3,17 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import Chart from 'react-apexcharts';
 
-const CardPrediction = () => {
-	const [predictions, setPredictions] = useState([]);
+const CardRadarChart = () => {
+	const [zoneCounts, setZoneCount] = useState([]);
 
 	const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-	const url = 'https://cdn.urbansdk.com/predictions.json';
+	const url = 'https://cdn.urbansdk.com/zone_count.json';
 
 	useEffect(() => {
 		fetch(proxyurl + url)
 			.then((response) => response.text())
 			.then((data) => JSON.parse(data))
-			.then((content) => setPredictions(content.data))
+			.then((content) => setZoneCount(content.data))
 			.catch(() =>
 				console.log('Can’t access ' + url + ' response. Blocked by browser?')
 			);
@@ -32,9 +32,7 @@ const CardPrediction = () => {
 				},
 			},
 			xaxis: {
-				categories: predictions.map((prediction) => prediction.label),
-			},
-			yaxis: {
+				categories: zoneCounts.map((zoneCount) => zoneCount.label),
 				labels: {
 					style: {
 						fontFamily: 'Poppins',
@@ -43,29 +41,23 @@ const CardPrediction = () => {
 					},
 				},
 			},
-			plotOptions: {
-				bar: { horizontal: true },
-			},
-			fill: {
-				colors: ['#f44336'],
-			},
 		},
 		series: [
 			{
 				name: 'Predicted Crashes',
-				data: predictions.map((prediction) => prediction.value),
+				data: zoneCounts.map((zoneCount) => zoneCount.value),
 			},
 		],
 	};
 	return (
 		<div>
-			<Card className='flexItem1 card'>
+			<Card className='flexItem2 card'>
 				<CardHeader
 					className='cardHeader'
-					title='Crash Predictions'
+					title='Zone Counts'
 					subheader="Here's the overview of track trends"
 				/>
-				<Chart options={data.options} series={data.series} type='bar' />
+				<Chart options={data.options} series={data.series} type='radar' />
 				<CardContent className='cardContent'>
 					<p>
 						Develop a dashboard to display and track trends in traffic crashes
@@ -78,4 +70,4 @@ const CardPrediction = () => {
 	);
 };
 
-export default CardPrediction;
+export default CardRadarChart;

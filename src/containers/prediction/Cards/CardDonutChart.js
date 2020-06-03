@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import Chart from 'react-apexcharts';
 
-const CardPrediction = () => {
+const CardDonutChart = () => {
 	const [predictions, setPredictions] = useState([]);
 
 	const proxyurl = 'https://cors-anywhere.herokuapp.com/';
@@ -20,52 +20,23 @@ const CardPrediction = () => {
 	}, []);
 
 	const data = {
+		series: predictions.map((prediction) => prediction.value),
 		options: {
 			chart: {
-				id: 'basic-bar',
-				dropShadow: {
-					enabled: true,
-					top: 0,
-					left: 0,
-					blur: 3,
-					opacity: 0.5,
-				},
+				type: 'pie',
 			},
-			xaxis: {
-				categories: predictions.map((prediction) => prediction.label),
-			},
-			yaxis: {
-				labels: {
-					style: {
-						fontFamily: 'Poppins',
-						fontSize: '12px',
-						fontWeight: 'bold',
-					},
-				},
-			},
-			plotOptions: {
-				bar: { horizontal: true },
-			},
-			fill: {
-				colors: ['#f44336'],
-			},
+			labels: predictions.map((prediction) => prediction.label),
 		},
-		series: [
-			{
-				name: 'Predicted Crashes',
-				data: predictions.map((prediction) => prediction.value),
-			},
-		],
 	};
 	return (
 		<div>
-			<Card className='flexItem1 card'>
+			<Card className='flexItem3 card'>
 				<CardHeader
 					className='cardHeader'
 					title='Crash Predictions'
 					subheader="Here's the overview of track trends"
 				/>
-				<Chart options={data.options} series={data.series} type='bar' />
+				<Chart options={data.options} series={data.series} type='donut' />
 				<CardContent className='cardContent'>
 					<p>
 						Develop a dashboard to display and track trends in traffic crashes
@@ -78,4 +49,4 @@ const CardPrediction = () => {
 	);
 };
 
-export default CardPrediction;
+export default CardDonutChart;

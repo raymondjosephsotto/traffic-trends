@@ -3,51 +3,40 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import Chart from 'react-apexcharts';
 
-const CardCompare = () => {
-	const [compare, setCompare] = useState([]);
+const CardRadialBarChart = () => {
+	const [zoneCounts, setZoneCount] = useState([]);
 
 	const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-	const url = 'https://cdn.urbansdk.com/actual_v_prediction.json';
+	const url = 'https://cdn.urbansdk.com/zone_count.json';
 
 	useEffect(() => {
 		fetch(proxyurl + url)
 			.then((response) => response.text())
 			.then((data) => JSON.parse(data))
-			.then((content) => setCompare(content.data))
+			.then((content) => setZoneCount(content.data))
 			.catch(() =>
 				console.log('Can’t access ' + url + ' response. Blocked by browser?')
 			);
 	}, []);
 
 	const data = {
+		series: zoneCounts.map((zoneCount) => zoneCount.value),
 		options: {
 			chart: {
-				id: 'basic-bar',
-				width: '40vw',
-				type: 'bar',
+				type: 'radialBar',
 			},
-		},
-		series: [
-			{
-				name: 'series-1',
-				data: compare && compare.predict_count.map((comp) => comp.data),
-			},
-		],
-		xaxis: {
-			categories:
-				compare && compare.timestamp_by_hour.map((timestamp) => timestamp),
+			labels: zoneCounts.map((zoneCount) => zoneCount.label),
 		},
 	};
-
 	return (
 		<div>
-			<Card className='flexItem1 card'>
+			<Card className='flexItem2 card'>
 				<CardHeader
 					className='cardHeader'
-					title='Crash Predictions'
+					title='Zone Counts'
 					subheader="Here's the overview of track trends"
 				/>
-				<Chart options={data.options} series={data.series} />
+				<Chart options={data.options} series={data.series} type='radialBar' />
 				<CardContent className='cardContent'>
 					<p>
 						Develop a dashboard to display and track trends in traffic crashes
@@ -60,4 +49,4 @@ const CardCompare = () => {
 	);
 };
 
-export default CardCompare;
+export default CardRadialBarChart;

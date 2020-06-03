@@ -2,10 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import styled from 'styled-components';
-import { AiOutlineMenuUnfold } from 'react-icons/ai';
+
+import { GoGraph } from 'react-icons/go';
 import { FaCarCrash } from 'react-icons/fa';
 import { MdPinDrop } from 'react-icons/md';
-import { GoGraph } from 'react-icons/go';
+import { GiTrafficCone } from 'react-icons/gi';
 import Logo from '../../assets/urbansdklogo.png';
 
 const NavItems = () => {
@@ -19,7 +20,7 @@ const NavItems = () => {
 					</LogoName>
 				</StyledNavItems>
 				<StyledNavItems>
-					<AiOutlineMenuUnfold className='icons' />
+					<GoGraph className='icons' />
 					<NavLink to='/' className='description'>
 						Dashboard
 					</NavLink>
@@ -31,13 +32,13 @@ const NavItems = () => {
 					</NavLink>
 				</StyledNavItems>
 				<StyledNavItems>
-					<MdPinDrop className='icons' />
+					<GiTrafficCone className='icons' />
 					<NavLink to='/zoneCount' className='description'>
 						Zone Count
 					</NavLink>
 				</StyledNavItems>
 				<StyledNavItems>
-					<GoGraph className='icons' />
+					<MdPinDrop className='icons' />
 					<NavLink to='/compare' className='description'>
 						Compare
 					</NavLink>

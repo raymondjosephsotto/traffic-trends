@@ -23,14 +23,28 @@ const CardZone = () => {
 		options: {
 			chart: {
 				id: 'basic-bar',
+				dropShadow: {
+					enabled: true,
+					top: 0,
+					left: 0,
+					blur: 3,
+					opacity: 0.5,
+				},
 			},
 			xaxis: {
 				categories: zoneCounts.map((zoneCount) => zoneCount.label),
+				labels: {
+					style: {
+						fontFamily: 'Poppins',
+						fontSize: '12px',
+						fontWeight: 'bold',
+					},
+				},
 			},
 		},
 		series: [
 			{
-				name: 'series-1',
+				name: 'Predicted Crashes',
 				data: zoneCounts.map((zoneCount) => zoneCount.value),
 			},
 		],
@@ -43,12 +57,7 @@ const CardZone = () => {
 					title='Zone Counts'
 					subheader="Here's the overview of track trends"
 				/>
-				<Chart
-					options={data.options}
-					series={data.series}
-					type='bar'
-					width='500'
-				/>
+				<Chart options={data.options} series={data.series} type='area' />
 				<CardContent className='cardContent'>
 					<p>
 						Develop a dashboard to display and track trends in traffic crashes

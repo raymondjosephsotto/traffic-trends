@@ -1,10 +1,18 @@
 import React from 'react';
 
+import { StyledCharts } from '../../components/Styled/StyledCharts';
+
+import CardBarChart from './Cards/CardBarChart';
+import CardAreaChart from './Cards/CardAreaChart';
+import CardDonutChart from './Cards/CardDonutChart';
+
 const Prediction = () => {
 	return (
-		<div>
-			<h1>CRASH PREDICTIONS</h1>
-		</div>
+		<StyledCharts>
+			<CardBarChart />
+			<CardAreaChart />
+			<CardDonutChart />
+		</StyledCharts>
 	);
 };
 

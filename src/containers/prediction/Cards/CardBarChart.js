@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import Chart from 'react-apexcharts';
 
-const CardPrediction = () => {
+const CardBarChart = () => {
 	const [predictions, setPredictions] = useState([]);
 
 	const proxyurl = 'https://cors-anywhere.herokuapp.com/';
@@ -33,8 +33,6 @@ const CardPrediction = () => {
 			},
 			xaxis: {
 				categories: predictions.map((prediction) => prediction.label),
-			},
-			yaxis: {
 				labels: {
 					style: {
 						fontFamily: 'Poppins',
@@ -44,10 +42,17 @@ const CardPrediction = () => {
 				},
 			},
 			plotOptions: {
-				bar: { horizontal: true },
+				bar: { horizontal: false },
 			},
 			fill: {
-				colors: ['#f44336'],
+				colors: ['#20E647'],
+				type: 'gradient',
+				gradient: {
+					shade: 'dark',
+					type: 'vertical',
+					gradientToColors: ['#87D4F9'],
+					stops: [0, 100],
+				},
 			},
 		},
 		series: [
@@ -78,4 +83,4 @@ const CardPrediction = () => {
 	);
 };
 
-export default CardPrediction;
+export default CardBarChart;

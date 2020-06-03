@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import Chart from 'react-apexcharts';
 
-const CardPrediction = () => {
+const CardAreaChart = () => {
 	const [predictions, setPredictions] = useState([]);
 
 	const proxyurl = 'https://cors-anywhere.herokuapp.com/';
@@ -33,8 +33,6 @@ const CardPrediction = () => {
 			},
 			xaxis: {
 				categories: predictions.map((prediction) => prediction.label),
-			},
-			yaxis: {
 				labels: {
 					style: {
 						fontFamily: 'Poppins',
@@ -42,12 +40,6 @@ const CardPrediction = () => {
 						fontWeight: 'bold',
 					},
 				},
-			},
-			plotOptions: {
-				bar: { horizontal: true },
-			},
-			fill: {
-				colors: ['#f44336'],
 			},
 		},
 		series: [
@@ -65,7 +57,7 @@ const CardPrediction = () => {
 					title='Crash Predictions'
 					subheader="Here's the overview of track trends"
 				/>
-				<Chart options={data.options} series={data.series} type='bar' />
+				<Chart options={data.options} series={data.series} type='area' />
 				<CardContent className='cardContent'>
 					<p>
 						Develop a dashboard to display and track trends in traffic crashes
@@ -78,4 +70,4 @@ const CardPrediction = () => {
 	);
 };
 
-export default CardPrediction;
+export default CardAreaChart;

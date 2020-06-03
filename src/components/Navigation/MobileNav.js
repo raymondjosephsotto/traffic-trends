@@ -8,10 +8,11 @@ import {
 	AppBar,
 } from '@material-ui/core/';
 import styled from 'styled-components';
-import { AiOutlineMenuUnfold } from 'react-icons/ai';
+
+import { GoGraph } from 'react-icons/go';
 import { FaCarCrash } from 'react-icons/fa';
 import { MdPinDrop } from 'react-icons/md';
-import { GoGraph } from 'react-icons/go';
+import { GiTrafficCone } from 'react-icons/gi';
 
 import LogoFull from '../../assets/urbansdkfulllogo.png';
 
@@ -37,7 +38,7 @@ const MobileNav = () => {
 					to='/'
 					label='Dashboard'
 					value='dashboard'
-					icon={<AiOutlineMenuUnfold className='icons' />}
+					icon={<GoGraph className='icons' />}
 				/>
 				<StyledBottomNavigationAction
 					component={NavLink}
@@ -51,14 +52,14 @@ const MobileNav = () => {
 					to='/zoneCount'
 					label='Zone Count'
 					value='zoneCount'
-					icon={<MdPinDrop className='icons' />}
+					icon={<GiTrafficCone className='icons' />}
 				/>
 				<StyledBottomNavigationAction
 					component={NavLink}
 					to='/compare'
 					label='Compare'
 					value='compare'
-					icon={<GoGraph className='icons' />}
+					icon={<MdPinDrop className='icons' />}
 				/>
 			</BottomNavigation>
 		</React.Fragment>
