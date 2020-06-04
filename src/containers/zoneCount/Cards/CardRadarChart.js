@@ -1,23 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import Chart from 'react-apexcharts';
+import { ContextApi } from '../../../contexts/ContextApi';
 
 const CardRadarChart = () => {
-	const [zoneCounts, setZoneCount] = useState([]);
-
-	const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-	const url = 'https://cdn.urbansdk.com/zone_count.json';
-
-	useEffect(() => {
-		fetch(proxyurl + url)
-			.then((response) => response.text())
-			.then((data) => JSON.parse(data))
-			.then((content) => setZoneCount(content.data))
-			.catch(() =>
-				console.log('Can’t access ' + url + ' response. Blocked by browser?')
-			);
-	}, []);
+	const zoneCounts = useContext(ContextApi);
 
 	const data = {
 		options: {

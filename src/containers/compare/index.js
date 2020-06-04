@@ -16,7 +16,7 @@ const Compare = () => {
 	};
 
 	const [compareData, setCompareData] = useState({});
-	const [level, setLevel] = useState('low');
+	// const [level, setLevel] = useState('low');
 	// const [data, setData] = useState([]);
 	const proxyurl = 'https://cors-anywhere.herokuapp.com/';
 	const url = 'https://cdn.urbansdk.com/actual_v_prediction.json';

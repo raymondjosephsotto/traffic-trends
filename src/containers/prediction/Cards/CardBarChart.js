@@ -1,23 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import Chart from 'react-apexcharts';
+import { ContextApi } from '../../../contexts/ContextApi';
 
 const CardBarChart = () => {
-	const [predictions, setPredictions] = useState([]);
-
-	const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-	const url = 'https://cdn.urbansdk.com/predictions.json';
-
-	useEffect(() => {
-		fetch(proxyurl + url)
-			.then((response) => response.text())
-			.then((data) => JSON.parse(data))
-			.then((content) => setPredictions(content.data))
-			.catch(() =>
-				console.log('Can’t access ' + url + ' response. Blocked by browser?')
-			);
-	}, []);
+	const predictions = useContext(ContextApi);
 
 	const data = {
 		options: {
