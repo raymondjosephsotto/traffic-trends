@@ -8,7 +8,6 @@ import { FaChartLine } from 'react-icons/fa';
 
 const ChartModal = () => {
 	const [open, setOpen] = useState(false);
-	// const [modalStyle] = useState(getModalStyle);
 	const classes = useStyles();
 
 	const handleOpen = () => {
@@ -49,15 +48,12 @@ export default ChartModal;
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
-		position: 'absolute',
-		top: '10vh',
-		left: '32vw',
-		minwidth: '340px',
+		marginTop: '10vh',
+		minWidth: '300px',
 		width: '40vw',
-		backgroundColor: theme.palette.background.paper,
-		// border: '2px solid #000',
-		boxShadow: theme.shadows[5],
-		padding: theme.spacing(2, 4, 3),
+		display: 'block',
+		marginLeft: 'auto',
+		marginRight: 'auto',
 	},
 }));
 
@@ -66,4 +62,7 @@ const StyledButtonWrapper = styled.div`
 	position: fixed;
 	top: 30vh;
 	right: 6vh;
+	@media screen and (max-width: 321px) {
+		top: 35vh;
+	}
 `;

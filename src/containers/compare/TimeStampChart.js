@@ -35,6 +35,16 @@ const TimeStampChart = (props) => {
 					},
 				},
 			},
+			fill: {
+				colors: ['#20E647'],
+				type: 'gradient',
+				gradient: {
+					shade: 'dark',
+					type: 'vertical',
+					gradientToColors: ['#87D4F9'],
+					stops: [0, 100],
+				},
+			},
 		},
 		series: [
 			{

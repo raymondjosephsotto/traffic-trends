@@ -1,63 +1,140 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 
-import { Card, CardHeader, CardContent } from '@material-ui/core';
-import Chart from 'react-apexcharts';
+import { Link } from 'react-router-dom';
+import DeckGL from '@deck.gl/react';
+import { LineLayer } from '@deck.gl/layers';
+import { StaticMap } from 'react-map-gl';
+import SelectButton from '../SelectButton';
+import { DataContext } from '../../../contexts/DataContext';
+import { Card, CardHeader, CardContent, Button } from '@material-ui/core';
+import styled from 'styled-components';
 
 const CardCompare = () => {
-	const [compare, setCompare] = useState([]);
+	const [level, setLevel] = useState('All');
+	const dataContext = useContext(DataContext);
 
-	const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-	const url = 'https://cdn.urbansdk.com/actual_v_prediction.json';
-
-	useEffect(() => {
-		fetch(proxyurl + url)
-			.then((response) => response.text())
-			.then((data) => JSON.parse(data))
-			.then((content) => setCompare(content.data))
-			.catch(() =>
-				console.log('Can’t access ' + url + ' response. Blocked by browser?')
-			);
-	}, []);
-
-	const data = {
-		options: {
-			chart: {
-				id: 'basic-bar',
-				width: '40vw',
-				type: 'bar',
-			},
-		},
-		series: [
-			{
-				name: 'series-1',
-				data: compare && compare.predict_count.map((comp) => comp.data),
-			},
-		],
-		xaxis: {
-			categories:
-				compare && compare.timestamp_by_hour.map((timestamp) => timestamp),
-		},
+	const initialViewState = {
+		longitude: -81.655651,
+		latitude: 30.3321838,
+		width: ' 50vw',
+		height: '50vh',
+		zoom: 10,
+		pitch: 0,
+		bearing: 0,
 	};
 
+	let data = [];
+	if (Object.keys(dataContext.compareData).length > 0) {
+		if (level === 'All') {
+			data = formatAllLayers([
+				...dataContext.compareData.coordinates['low'],
+				...dataContext.compareData.coordinates['medium'],
+				...dataContext.compareData.coordinates['high'],
+			]);
+		} else {
+			data = formatAllLayers(dataContext.compareData.coordinates[level]);
+		}
+	}
+
 	return (
-		<div>
-			<Card className='flexItem1 card'>
-				<CardHeader
-					className='cardHeader'
-					title='Crash Predictions'
-					subheader="Here's the overview of track trends"
-				/>
-				<Chart options={data.options} series={data.series} />
-				<CardContent className='cardContent'>
-					<p>
-						Develop a dashboard to display and track trends in traffic crashes
-						in Duval County. Data: Use the provided JSON data for traffic
-						crashes to develop static sources.
-					</p>
-				</CardContent>
-			</Card>
-		</div>
+		<Card className='flexItem3 card'>
+			<CardHeader
+				className='cardHeader'
+				title='Compare Predictions vs Actual'
+				subheader="Here's the overview of track trends"
+			/>
+			{Object.keys(dataContext.compareData).length > 0 ? (
+				<DeckGL
+					key={data.length}
+					initialViewState={initialViewState}
+					controller={true}
+					layers={data}
+					style={{
+						height: '50vh',
+						minWidth: '250px',
+						maxWidth: '500px',
+						position: 'relative',
+						display: 'block',
+						margin: 'auto',
+						padding: '2px',
+					}}>
+					<StaticMap
+						mapStyle='mapbox://styles/sottrj/ckb2gixsx15vz1inqg3o1lbdn'
+						mapboxApiAccessToken={
+							'pk.eyJ1Ijoic290dHJqIiwiYSI6ImNrYXk0ZjZsNzBldDYzMG83MjN3NHkwZDEifQ.E0F7oUDBoDDfpccXwzU8Cw'
+						}
+					/>
+					<SelectButton level={level} onLevelChange={setLevel} />
+				</DeckGL>
+			) : (
+				'Loading'
+			)}
+			<CardContent>
+				<p>
+					Develop a dashboard to display and track trends in traffic crashes in
+					Duval County. Data: Use the provided JSON data for traffic crashes to
+					develop static sources.
+				</p>
+			</CardContent>
+			<StyledButton>
+				<Button
+					size='medium'
+					color='primary'
+					style={{
+						fontWeight: 'bold',
+					}}>
+					<Link to='/compare' className='linkButton'>
+						Learn More
+					</Link>
+				</Button>
+			</StyledButton>
+		</Card>
 	);
 };
 
 export default CardCompare;
+
+const formatAllLayers = (levelData) => {
+	const raw_layers = levelData.map(({ shape }) =>
+		formatLine(shape.coordinates)
+	);
+
+	const layers = raw_layers.map(
+		(layer, index) =>
+			new LineLayer({
+				id: `line-layer_${index}`,
+				data: layer,
+				getWidth: 8,
+				opacity: 1,
+				getColor: [255, 0, 0, 50],
+			})
+	);
+	return layers;
+};
+
+const formatLine = (coord) => {
+	let newArray = [];
+	for (let i = 0; i < coord.length; i++) {
+		if (!coord[i + 1]) {
+			return newArray;
+		} else {
+			const newCords = {
+				sourcePosition: coord[i],
+				targetPosition: coord[i + 1],
+			};
+			newArray.push(newCords);
+		}
+	}
+};
+
+const StyledButton = styled.div`
+	font-family: 'Open Sans';
+	font-weight: bold;
+	display: flex;
+	justify-content: flex-end;
+	padding: 2px;
+	.linkButton {
+		text-decoration: none;
+		color: #1489fe;
+	}
+`;
