@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 
-import { ContextApi } from '../../../contexts/ContextApi';
-import { Card, CardHeader, CardContent } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { DataContext } from '../../../contexts/DataContext';
+import { Card, CardHeader, CardContent, Button } from '@material-ui/core';
 import Chart from 'react-apexcharts';
+import styled from 'styled-components';
 
 const CardZone = () => {
-	const zoneCounts = useContext(ContextApi);
-	const data = {
+	const dataContext = useContext(DataContext);
+	const config = {
 		options: {
 			chart: {
 				id: 'area',
@@ -22,7 +24,7 @@ const CardZone = () => {
 				},
 			},
 			xaxis: {
-				categories: zoneCounts.map((zoneCount) => zoneCount.label),
+				categories: dataContext.zoneCounts.map((zoneCount) => zoneCount.label),
 				labels: {
 					style: {
 						fontFamily: 'Poppins',
@@ -35,7 +37,7 @@ const CardZone = () => {
 		series: [
 			{
 				name: 'Predicted Crashes',
-				data: zoneCounts.map((zoneCount) => zoneCount.value),
+				data: dataContext.zoneCounts.map((zoneCount) => zoneCount.value),
 			},
 		],
 	};
@@ -47,7 +49,7 @@ const CardZone = () => {
 					title='Zone Counts'
 					subheader="Here's the overview of track trends"
 				/>
-				<Chart options={data.options} series={data.series} type='area' />
+				<Chart options={config.options} series={config.series} type='area' />
 				<CardContent className='cardContent'>
 					<p>
 						Develop a dashboard to display and track trends in traffic crashes
@@ -55,9 +57,33 @@ const CardZone = () => {
 						crashes to develop static sources.
 					</p>
 				</CardContent>
+				<StyledButton>
+					<Button
+						size='medium'
+						color='primary'
+						style={{
+							fontWeight: 'bold',
+						}}>
+						<Link to='/zoneCount' className='linkButton'>
+							Learn More
+						</Link>
+					</Button>
+				</StyledButton>
 			</Card>
 		</div>
 	);
 };
 
 export default CardZone;
+
+const StyledButton = styled.div`
+	font-family: 'Open Sans';
+	font-weight: bold;
+	display: flex;
+	justify-content: flex-end;
+	padding: 2px;
+	.linkButton {
+		text-decoration: none;
+		color: #1489fe;
+	}
+`;

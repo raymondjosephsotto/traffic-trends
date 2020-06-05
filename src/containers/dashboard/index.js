@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { StyledCharts } from '../../components/Styled/StyledCharts';
+import DataProvider from '../../contexts/DataContext';
 
 import CardZone from './Cards/CardZone';
 import CardPrediction from './Cards/CardPrediction';
@@ -8,11 +9,13 @@ import CardPrediction from './Cards/CardPrediction';
 
 const Dashboard = () => {
 	return (
-		<StyledCharts>
-			<CardPrediction />
-			<CardZone />
-			{/* <CardCompare /> */}
-		</StyledCharts>
+		<DataProvider>
+			<StyledCharts>
+				<CardPrediction />
+				<CardZone />
+				{/* <CardCompare /> */}
+			</StyledCharts>
+		</DataProvider>
 	);
 };
 

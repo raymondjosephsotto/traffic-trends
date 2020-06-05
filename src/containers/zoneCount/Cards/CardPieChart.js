@@ -2,18 +2,18 @@ import React, { useContext } from 'react';
 
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import Chart from 'react-apexcharts';
-import { ContextApi } from '../../../contexts/ContextApi';
+import { DataContext } from '../../../contexts/DataContext';
 
 const CardPieChart = () => {
-	const zoneCounts = useContext(ContextApi);
+	const dataContext = useContext(DataContext);
 
-	const data = {
-		series: zoneCounts.map((zoneCount) => zoneCount.value),
+	const config = {
+		series: dataContext.zoneCounts.map((zoneCount) => zoneCount.value),
 		options: {
 			chart: {
 				type: 'pie',
 			},
-			labels: zoneCounts.map((zoneCount) => zoneCount.label),
+			labels: dataContext.zoneCounts.map((zoneCount) => zoneCount.label),
 		},
 	};
 	return (
@@ -24,7 +24,7 @@ const CardPieChart = () => {
 					title='Zone Counts'
 					subheader="Here's the overview of track trends"
 				/>
-				<Chart options={data.options} series={data.series} type='pie' />
+				<Chart options={config.options} series={config.series} type='pie' />
 				<CardContent className='cardContent'>
 					<p>
 						Develop a dashboard to display and track trends in traffic crashes

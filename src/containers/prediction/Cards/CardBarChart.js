@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import Chart from 'react-apexcharts';
-import { ContextApi } from '../../../contexts/ContextApi';
+import { DataContext } from '../../../contexts/DataContext';
 
 const CardBarChart = () => {
-	const predictions = useContext(ContextApi);
+	const dataContext = useContext(DataContext);
 
-	const data = {
+	const config = {
 		options: {
 			chart: {
 				id: 'basic-bar',
@@ -20,7 +20,9 @@ const CardBarChart = () => {
 				},
 			},
 			xaxis: {
-				categories: predictions.map((prediction) => prediction.label),
+				categories: dataContext.predictions.map(
+					(prediction) => prediction.label
+				),
 				labels: {
 					style: {
 						fontFamily: 'Poppins',
@@ -46,7 +48,7 @@ const CardBarChart = () => {
 		series: [
 			{
 				name: 'Predicted Crashes',
-				data: predictions.map((prediction) => prediction.value),
+				data: dataContext.predictions.map((prediction) => prediction.value),
 			},
 		],
 	};
@@ -58,7 +60,7 @@ const CardBarChart = () => {
 					title='Crash Predictions'
 					subheader="Here's the overview of track trends"
 				/>
-				<Chart options={data.options} series={data.series} type='bar' />
+				<Chart options={config.options} series={config.series} type='bar' />
 				<CardContent className='cardContent'>
 					<p>
 						Develop a dashboard to display and track trends in traffic crashes

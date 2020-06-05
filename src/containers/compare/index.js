@@ -1,52 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 
 import DeckGL from '@deck.gl/react';
 import { LineLayer } from '@deck.gl/layers';
 import { StaticMap } from 'react-map-gl';
+import SelectButton from './SelectButton';
+import { DataContext } from '../../contexts/DataContext';
+import ChartModal from './ChartModal';
 
 const Compare = () => {
+	const [level, setLevel] = useState('All');
+	const dataContext = useContext(DataContext);
+
 	const initialViewState = {
 		longitude: -81.655651,
 		latitude: 30.3321838,
 		width: ' 100vw',
 		height: '100vh',
-		zoom: 12,
+		zoom: 10,
 		pitch: 0,
 		bearing: 0,
 	};
 
-	const [compareData, setCompareData] = useState({});
-	// const [level, setLevel] = useState('low');
-	// const [data, setData] = useState([]);
-	const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-	const url = 'https://cdn.urbansdk.com/actual_v_prediction.json';
-
-	useEffect(() => {
-		fetch(proxyurl + url)
-			.then((response) => response.text())
-			.then((data) => JSON.parse(data))
-			.then((content) => {
-				setCompareData(content.data);
-			})
-			.catch(() =>
-				console.log('Can’t access ' + url + ' response. Blocked by browser?')
-			);
-	}, []);
-
-	// useEffect(() => {
-	// 	if (Object.keys(compareData).length > 0)
-	// 		setData(formatAllLayers(compareData.coordinates.high));
-	// }, [compareData]);
-
 	let data = [];
-	if (Object.keys(compareData).length > 0) {
-		data = formatAllLayers(compareData.coordinates.high);
+	if (Object.keys(dataContext.compareData).length > 0) {
+		if (level === 'All') {
+			data = formatAllLayers([
+				...dataContext.compareData.coordinates['low'],
+				...dataContext.compareData.coordinates['medium'],
+				...dataContext.compareData.coordinates['high'],
+			]);
+		} else {
+			data = formatAllLayers(dataContext.compareData.coordinates[level]);
+		}
 	}
-	console.log(data);
 
 	return (
-		<>
-			{data.length > 0 && (
+		<div>
+			{Object.keys(dataContext.compareData).length > 0 ? (
 				<DeckGL
 					key={data.length}
 					initialViewState={initialViewState}
@@ -57,9 +47,13 @@ const Compare = () => {
 							'pk.eyJ1Ijoic290dHJqIiwiYSI6ImNrYXk0ZjZsNzBldDYzMG83MjN3NHkwZDEifQ.E0F7oUDBoDDfpccXwzU8Cw'
 						}
 					/>
+					<SelectButton level={level} onLevelChange={setLevel} />
+					<ChartModal />
 				</DeckGL>
+			) : (
+				'Loading'
 			)}
-		</>
+		</div>
 	);
 };
 

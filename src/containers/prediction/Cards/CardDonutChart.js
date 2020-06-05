@@ -2,18 +2,18 @@ import React, { useContext } from 'react';
 
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import Chart from 'react-apexcharts';
-import { ContextApi } from '../../../contexts/ContextApi';
+import { DataContext } from '../../../contexts/DataContext';
 
 const CardDonutChart = () => {
-	const predictions = useContext(ContextApi);
+	const dataContext = useContext(DataContext);
 
-	const data = {
-		series: predictions.map((prediction) => prediction.value),
+	const config = {
+		series: dataContext.predictions.map((prediction) => prediction.value),
 		options: {
 			chart: {
 				type: 'pie',
 			},
-			labels: predictions.map((prediction) => prediction.label),
+			labels: dataContext.predictions.map((prediction) => prediction.label),
 		},
 	};
 	return (
@@ -24,7 +24,7 @@ const CardDonutChart = () => {
 					title='Crash Predictions'
 					subheader="Here's the overview of track trends"
 				/>
-				<Chart options={data.options} series={data.series} type='donut' />
+				<Chart options={config.options} series={config.series} type='donut' />
 				<CardContent className='cardContent'>
 					<p>
 						Develop a dashboard to display and track trends in traffic crashes

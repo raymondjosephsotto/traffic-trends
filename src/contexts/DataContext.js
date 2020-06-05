@@ -1,16 +1,16 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-export const ContextApi = createContext();
+export const DataContext = createContext();
 
 const proxyurl = 'https://cors-anywhere.herokuapp.com/';
 const predictionUrl = 'https://cdn.urbansdk.com/predictions.json';
 const zoneUrl = 'https://cdn.urbansdk.com/zone_count.json';
-// const compareUrl = 'https://cdn.urbansdk.com/actual_v_prediction.json';
+const compareUrl = 'https://cdn.urbansdk.com/actual_v_prediction.json';
 
-const ContextApiProvider = (props) => {
+const DataProvider = (props) => {
 	const [predictions, setPredictions] = useState([]);
 	const [zoneCounts, setZoneCount] = useState([]);
-	// const [compareData, setCompareData] = useState({});
+	const [compareData, setCompareData] = useState({});
 
 	useEffect(() => {
 		fetch(proxyurl + predictionUrl)
@@ -22,6 +22,7 @@ const ContextApiProvider = (props) => {
 					'Can’t access ' + predictionUrl + ' response. Blocked by browser?'
 				)
 			);
+
 		fetch(proxyurl + zoneUrl)
 			.then((response) => response.text())
 			.then((data) => JSON.parse(data))
@@ -31,22 +32,23 @@ const ContextApiProvider = (props) => {
 					'Can’t access ' + zoneUrl + ' response. Blocked by browser?'
 				)
 			);
-		// fetch(proxyurl + compareUrl)
-		// 	.then((response) => response.text())
-		// 	.then((data) => JSON.parse(data))
-		// 	.then((content) => {
-		// 		setCompareData(content.data);
-		// 	})
-		// 	.catch(() =>
-		// 		console.log('Can’t access ' + url + ' response. Blocked by browser?')
-		// 	);
+
+		fetch(proxyurl + compareUrl)
+			.then((response) => response.text())
+			.then((data) => JSON.parse(data))
+			.then((content) => setCompareData(content.data))
+			.catch(() =>
+				console.log(
+					'Can’t access ' + compareUrl + ' response. Blocked by browser?'
+				)
+			);
 	}, []);
 
 	return (
-		<ContextApi.Provider value={(predictions, zoneCounts)}>
+		<DataContext.Provider value={{ predictions, zoneCounts, compareData }}>
 			{props.children}
-		</ContextApi.Provider>
+		</DataContext.Provider>
 	);
 };
 
-export default ContextApiProvider;
+export default DataProvider;

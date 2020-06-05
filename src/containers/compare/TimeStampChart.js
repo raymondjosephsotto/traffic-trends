@@ -1,16 +1,15 @@
 import React, { useContext } from 'react';
 
-import { Card, CardHeader, CardContent } from '@material-ui/core';
+import { Card, CardHeader, CardContent, Button } from '@material-ui/core';
 import Chart from 'react-apexcharts';
-import { DataContext } from '../../../contexts/DataContext';
+import { DataContext } from '../../contexts/DataContext';
 
-const CardAreaChart = () => {
+const TimeStampChart = (props) => {
 	const dataContext = useContext(DataContext);
-
 	const config = {
 		options: {
 			chart: {
-				id: 'basic-bar',
+				id: 'area-chart',
 				dropShadow: {
 					enabled: true,
 					top: 0,
@@ -23,8 +22,10 @@ const CardAreaChart = () => {
 				},
 			},
 			xaxis: {
-				categories: dataContext.predictions.map(
-					(prediction) => prediction.label
+				categories: dataContext.compareData.timestamp_by_hour.map(
+					(time, index) => {
+						return formatDate(time);
+					}
 				),
 				labels: {
 					style: {
@@ -38,29 +39,38 @@ const CardAreaChart = () => {
 		series: [
 			{
 				name: 'Predicted Crashes',
-				data: dataContext.predictions.map((prediction) => prediction.value),
+				data: dataContext.compareData.predict_count.data,
 			},
 		],
 	};
+
 	return (
 		<div>
 			<Card className='flexItem1 card'>
 				<CardHeader
 					className='cardHeader'
-					title='Crash Predictions'
-					subheader="Here's the overview of track trends"
+					title='Predictions vs Actual'
+					subheader='Predict Count and Timestamp by Hour'
 				/>
 				<Chart options={config.options} series={config.series} type='area' />
 				<CardContent className='cardContent'>
-					<p>
-						Develop a dashboard to display and track trends in traffic crashes
-						in Duval County. Data: Use the provided JSON data for traffic
-						crashes to develop static sources.
-					</p>
+					<Button
+						variant='contained'
+						color='secondary'
+						type='button'
+						onClick={props.onClose}>
+						Close
+					</Button>
 				</CardContent>
 			</Card>
 		</div>
 	);
 };
 
-export default CardAreaChart;
+export default TimeStampChart;
+
+const formatDate = (seconds) => {
+	const date = new Date(seconds);
+
+	return `${date.getHours()}:${date.getMinutes()}`;
+};

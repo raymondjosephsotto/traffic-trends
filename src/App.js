@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
-import ContextApiProvider from './contexts/ContextApi';
+import DataProvider from './contexts/DataContext';
 import Navigation from './components/Navigation/Navigation';
 import Canvas from './components/Common/Canvas';
 import Dashboard from './containers/dashboard';
@@ -15,13 +15,13 @@ const App = () => {
 			<Navigation />
 			<Canvas>
 				<Switch>
-					<ContextApiProvider>
+					<DataProvider>
 						<Route exact path='/' component={Dashboard} />
 						<Route path='/dashboard' component={Dashboard} />
 						<Route exact path='/prediction' component={Prediction} />
 						<Route exact path='/zoneCount' component={ZoneCount} />
 						<Route exact path='/compare' component={Compare} />
-					</ContextApiProvider>
+					</DataProvider>
 				</Switch>
 			</Canvas>
 		</React.Fragment>
