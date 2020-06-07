@@ -9,8 +9,8 @@ import { DataContext } from '../../../contexts/DataContext';
 import { Card, CardHeader, CardContent, Button } from '@material-ui/core';
 import styled from 'styled-components';
 
-const CardCompare = () => {
-	const [level, setLevel] = useState('All');
+const CardCompareMap = () => {
+	const [level, setLevel] = useState('low');
 	const dataContext = useContext(DataContext);
 
 	const initialViewState = {
@@ -23,16 +23,29 @@ const CardCompare = () => {
 		bearing: 0,
 	};
 
+	const colors = {
+		low: [244, 208, 63],
+		high: [255, 0, 0],
+		medium: [247, 202, 24],
+		All: [0, 0, 0],
+	};
+
 	let data = [];
 	if (Object.keys(dataContext.compareData).length > 0) {
 		if (level === 'All') {
-			data = formatAllLayers([
-				...dataContext.compareData.coordinates['low'],
-				...dataContext.compareData.coordinates['medium'],
-				...dataContext.compareData.coordinates['high'],
-			]);
+			data = formatAllLayers(
+				[
+					...dataContext.compareData.coordinates['low'],
+					...dataContext.compareData.coordinates['medium'],
+					...dataContext.compareData.coordinates['high'],
+				],
+				colors[level]
+			);
 		} else {
-			data = formatAllLayers(dataContext.compareData.coordinates[level]);
+			data = formatAllLayers(
+				dataContext.compareData.coordinates[level],
+				colors[level]
+			);
 		}
 	}
 
@@ -92,9 +105,9 @@ const CardCompare = () => {
 	);
 };
 
-export default CardCompare;
+export default CardCompareMap;
 
-const formatAllLayers = (levelData) => {
+const formatAllLayers = (levelData, color) => {
 	const raw_layers = levelData.map(({ shape }) =>
 		formatLine(shape.coordinates)
 	);
@@ -106,7 +119,7 @@ const formatAllLayers = (levelData) => {
 				data: layer,
 				getWidth: 8,
 				opacity: 1,
-				getColor: [255, 0, 0, 50],
+				getColor: color,
 			})
 	);
 	return layers;

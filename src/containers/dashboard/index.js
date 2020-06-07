@@ -5,7 +5,7 @@ import DataProvider from '../../contexts/DataContext';
 
 import CardZone from './Cards/CardZone';
 import CardPrediction from './Cards/CardPrediction';
-import CardCompare from './Cards/CardCompare';
+import CardCompareMap from './Cards/CardCompareMap';
 
 const Dashboard = () => {
 	return (
@@ -13,7 +13,7 @@ const Dashboard = () => {
 			<StyledCharts>
 				<CardPrediction />
 				<CardZone />
-				<CardCompare />
+				<CardCompareMap />
 			</StyledCharts>
 		</DataProvider>
 	);
