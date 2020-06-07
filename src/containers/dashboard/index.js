@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { StyledCharts } from '../../components/Styled/StyledCharts';
-import DataProvider from '../../contexts/DataContext';
+import DataProvider, { DataContext } from '../../contexts/DataContext';
 
 import CardZone from './Cards/CardZone';
 import CardPrediction from './Cards/CardPrediction';
-import CardCompareMap from './Cards/CardCompareMap';
+import CardCompare from './Cards/CardCompare';
 
 const Dashboard = () => {
+	const dataContext = useContext(DataContext);
 	return (
 		<DataProvider>
-			<StyledCharts>
-				<CardPrediction />
-				<CardZone />
-				<CardCompareMap />
-			</StyledCharts>
+			{Object.keys(dataContext.compareData).length > 0 ? (
+				<StyledCharts>
+					<CardPrediction />
+					<CardZone />
+					<CardCompare />
+				</StyledCharts>
+			) : (
+				'Loading'
+			)}
 		</DataProvider>
 	);
 };

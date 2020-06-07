@@ -13,8 +13,9 @@ export const StyledCharts = styled.div`
 		border-radius: 12px;
 		padding: 12px;
 	}
-	.card .flexItem3 {
+	.flexItem3 {
 		flex-grow: 2;
+		max-width: 1250px;
 	}
 	@media screen and (max-width: 897px) {
 		padding: 10%;

@@ -18,7 +18,7 @@ const CardDonutChart = () => {
 	};
 	return (
 		<div>
-			<Card className='flexItem3 card'>
+			<Card className='flexItem2 card'>
 				<CardHeader
 					className='cardHeader'
 					title='Crash Predictions'

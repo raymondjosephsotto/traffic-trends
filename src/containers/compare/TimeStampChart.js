@@ -21,6 +21,7 @@ const TimeStampChart = (props) => {
 					enabled: false,
 				},
 			},
+			colors: ['#20E647'],
 			xaxis: {
 				categories: dataContext.compareData.timestamp_by_hour.map(
 					(time, index) => {

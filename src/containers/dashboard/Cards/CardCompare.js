@@ -7,6 +7,7 @@ import { StaticMap } from 'react-map-gl';
 import SelectButton from '../SelectButton';
 import { DataContext } from '../../../contexts/DataContext';
 import { Card, CardHeader, CardContent, Button } from '@material-ui/core';
+import CompareChart from '../CompareChart';
 import styled from 'styled-components';
 
 const CardCompareMap = () => {
@@ -50,58 +51,63 @@ const CardCompareMap = () => {
 	}
 
 	return (
-		<Card className='flexItem3 card'>
-			<CardHeader
-				className='cardHeader'
-				title='Compare Predictions vs Actual'
-				subheader="Here's the overview of track trends"
-			/>
+		<div>
 			{Object.keys(dataContext.compareData).length > 0 ? (
-				<DeckGL
-					key={data.length}
-					initialViewState={initialViewState}
-					controller={true}
-					layers={data}
-					style={{
-						height: '50vh',
-						minWidth: '250px',
-						maxWidth: '500px',
-						position: 'relative',
-						display: 'block',
-						margin: 'auto',
-						padding: '2px',
-					}}>
-					<StaticMap
-						mapStyle='mapbox://styles/sottrj/ckb2gixsx15vz1inqg3o1lbdn'
-						mapboxApiAccessToken={
-							'pk.eyJ1Ijoic290dHJqIiwiYSI6ImNrYXk0ZjZsNzBldDYzMG83MjN3NHkwZDEifQ.E0F7oUDBoDDfpccXwzU8Cw'
-						}
+				<Card className='flexItem3 card'>
+					<CardHeader
+						className='cardHeader'
+						title='Compare Predictions vs Actual'
+						subheader="Here's the overview of track trends"
 					/>
-					<SelectButton level={level} onLevelChange={setLevel} />
-				</DeckGL>
+					<StyledContent>
+						<DeckGL
+							key={data.length}
+							initialViewState={initialViewState}
+							controller={true}
+							layers={data}
+							style={{
+								height: '50vh',
+								minWidth: '250px',
+								maxWidth: '500px',
+								position: 'relative',
+								display: 'block',
+								margin: 'auto',
+								padding: '2px',
+							}}>
+							<StaticMap
+								mapStyle='mapbox://styles/sottrj/ckb2gixsx15vz1inqg3o1lbdn'
+								mapboxApiAccessToken={
+									'pk.eyJ1Ijoic290dHJqIiwiYSI6ImNrYXk0ZjZsNzBldDYzMG83MjN3NHkwZDEifQ.E0F7oUDBoDDfpccXwzU8Cw'
+								}
+							/>
+							<SelectButton level={level} onLevelChange={setLevel} />
+						</DeckGL>
+						<CompareChart />
+					</StyledContent>
+					<CardContent>
+						<p>
+							Develop a dashboard to display and track trends in traffic crashes
+							in Duval County. Data: Use the provided JSON data for traffic
+							crashes to develop static sources.
+						</p>
+					</CardContent>
+					<StyledButton>
+						<Button
+							size='medium'
+							color='primary'
+							style={{
+								fontWeight: 'bold',
+							}}>
+							<Link to='/compare' className='linkButton'>
+								Learn More
+							</Link>
+						</Button>
+					</StyledButton>
+				</Card>
 			) : (
 				'Loading'
 			)}
-			<CardContent>
-				<p>
-					Develop a dashboard to display and track trends in traffic crashes in
-					Duval County. Data: Use the provided JSON data for traffic crashes to
-					develop static sources.
-				</p>
-			</CardContent>
-			<StyledButton>
-				<Button
-					size='medium'
-					color='primary'
-					style={{
-						fontWeight: 'bold',
-					}}>
-					<Link to='/compare' className='linkButton'>
-						Learn More
-					</Link>
-				</Button>
-			</StyledButton>
-		</Card>
+		</div>
 	);
 };
 
@@ -150,4 +156,10 @@ const StyledButton = styled.div`
 		text-decoration: none;
 		color: #1489fe;
 	}
+`;
+
+const StyledContent = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
 `;

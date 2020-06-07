@@ -22,6 +22,17 @@ const CardAreaChart = () => {
 					enabled: false,
 				},
 			},
+			colors: ['#fffc00'],
+			fill: {
+				colors: ['#fffc00'],
+				type: 'gradient',
+				gradient: {
+					shade: 'dark',
+					type: 'vertical',
+					gradientToColors: ['#ffffff'],
+					stops: [80, 100],
+				},
+			},
 			xaxis: {
 				categories: dataContext.predictions.map(
 					(prediction) => prediction.label
