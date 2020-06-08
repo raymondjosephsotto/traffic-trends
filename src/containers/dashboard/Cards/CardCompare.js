@@ -10,7 +10,7 @@ import { Card, CardHeader, CardContent, Button } from '@material-ui/core';
 import CompareChart from '../CompareChart';
 import styled from 'styled-components';
 
-const CardCompareMap = () => {
+const CardCompare = () => {
 	const [level, setLevel] = useState('low');
 	const dataContext = useContext(DataContext);
 
@@ -75,7 +75,7 @@ const CardCompareMap = () => {
 								padding: '2px',
 							}}>
 							<StaticMap
-								mapStyle='mapbox://styles/sottrj/ckb2gixsx15vz1inqg3o1lbdn'
+								mapStyle='mapbox://styles/sottrj/ckb5y7hlv43n01itchd5fs508'
 								mapboxApiAccessToken={
 									'pk.eyJ1Ijoic290dHJqIiwiYSI6ImNrYXk0ZjZsNzBldDYzMG83MjN3NHkwZDEifQ.E0F7oUDBoDDfpccXwzU8Cw'
 								}
@@ -111,7 +111,7 @@ const CardCompareMap = () => {
 	);
 };
 
-export default CardCompareMap;
+export default CardCompare;
 
 const formatAllLayers = (levelData, color) => {
 	const raw_layers = levelData.map(({ shape }) =>

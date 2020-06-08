@@ -56,6 +56,7 @@ const Compare = () => {
 					controller={true}
 					layers={data}>
 					<StaticMap
+						mapStyle='mapbox://styles/sottrj/ckb5yhita2kh01inj1zqw33wa'
 						mapboxApiAccessToken={
 							'pk.eyJ1Ijoic290dHJqIiwiYSI6ImNrYXk0ZjZsNzBldDYzMG83MjN3NHkwZDEifQ.E0F7oUDBoDDfpccXwzU8Cw'
 						}
