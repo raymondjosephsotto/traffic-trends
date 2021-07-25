@@ -14,7 +14,7 @@ import { FaCarCrash } from 'react-icons/fa';
 import { MdPinDrop } from 'react-icons/md';
 import { GiTrafficCone } from 'react-icons/gi';
 
-import LogoFull from '../../assets/urbansdkfulllogo.png';
+import Logo from '../../assets/urbansdklogo.png';
 
 const MobileNav = () => {
 	const classes = useStyles();
@@ -27,7 +27,11 @@ const MobileNav = () => {
 	return (
 		<React.Fragment>
 			<AppBar className={classes.appBar}>
-				<img src={LogoFull} alt='URBANSDK' className={classes.logoFull} />
+				
+					<LogoWrapper>
+					<img src={Logo} alt='logo' className='icons' />
+						<b>TRAFFIC</b>TRENDS
+					</LogoWrapper>
 			</AppBar>
 			<BottomNavigation
 				value={value}
@@ -104,5 +108,20 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)`
 	.MuiBottomNavigationAction-label {
 		font-size: 2px;
 		line-height: 14px;
+	}
+`;
+
+export const LogoWrapper = styled.div`
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-family: 'Poppins', sans-serif;
+	font-size: 1.1em;
+
+	img{
+		width: 30px;
+		height: 30px;
+		margin: 5px ;
 	}
 `;

@@ -51,6 +51,7 @@ const Compare = () => {
 		<div>
 			{Object.keys(dataContext.compareData).length > 0 ? (
 				<DeckGL
+				style={{position: 'fixed', overflow: 'hidden'}}
 					key={data.length}
 					initialViewState={initialViewState}
 					controller={true}

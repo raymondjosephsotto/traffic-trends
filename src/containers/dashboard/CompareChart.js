@@ -31,9 +31,6 @@ const CompareChart = (props) => {
 			dataLabels: {
 				enabled: true,
 			},
-			dataLabels: {
-				enabled: true,
-			},
 			stroke: {
 				curve: 'stepline',
 			},

@@ -53,13 +53,13 @@ const CardCompare = () => {
 	return (
 		<div>
 			{Object.keys(dataContext.compareData).length > 0 ? (
-				<Card className='flexItem3 card'>
+				<Card className='flexItem3 card' >
 					<CardHeader
 						className='cardHeader'
 						title='Compare Predictions vs Actual'
 						subheader="Here's the overview of track trends"
 					/>
-					<StyledContent>
+					<StyledContent >
 						<DeckGL
 							key={data.length}
 							initialViewState={initialViewState}

@@ -16,7 +16,7 @@ const NavItems = () => {
 				<StyledNavItems>
 					<img src={Logo} alt='logo' className='icons' />
 					<LogoName>
-						<b>URBAN</b>SDK
+						<b>TRAFFIC</b>TRENDS
 					</LogoName>
 				</StyledNavItems>
 				<StyledNavItems>
@@ -66,7 +66,7 @@ export const LogoName = styled.div`
 	margin-left: 10px;
 	color: white;
 	font-family: 'Poppins', sans-serif;
-	font-size: 1.45em;
+	font-size: 1.1em;
 	visibility: hidden;
 `;
 
