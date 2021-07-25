@@ -2,7 +2,8 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const DataContext = createContext();
 
-const proxyurl = 'https://thingproxy.freeboard.io/fetch/';
+// const proxyurl = 'https://thingproxy.freeboard.io/fetch/';
+const proxyurl = 'https://traffic-trends-dashboard.web.app/';
 const predictionUrl = 'https://cdn.urbansdk.com/predictions.json';
 const zoneUrl = 'https://cdn.urbansdk.com/zone_count.json';
 const compareUrl = 'https://cdn.urbansdk.com/actual_v_prediction.json';
